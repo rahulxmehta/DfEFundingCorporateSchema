@@ -1,0 +1,467 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://dfe.gov.uk.com/funding.schema.json",
+	"title": "Corporate funding schema",
+	"description": "A Department of Education view of funding allocation",
+	"version": "0.4",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+		"fundinggroup": {
+			"$ref": "#/definitions/fundinggrouping-schema"
+		}
+	},
+	"additionalProperties": false,
+	"required": [
+		"fundinggroup"
+	],
+	"definitions": {
+		"fundings-schema": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/funding-schema"
+			},
+			"additionalProperties": false
+		},
+		"fundinggrouping-schema": {
+			"properties": {
+				"fundingstream": {
+					"$ref": "#/definitions/fundingstream-schema"
+				},
+				"fundingperiod": {
+					"$ref": "#/definitions/fundingperiod-schema"
+				},
+				"fundingidentifier": {
+					"type": "string"
+				},
+				"fundingversion": {
+					"type": "number"
+				},
+				"fundingstatus": {
+					"type": "string",
+					"description": "Published (or Approved in future)"
+				},
+				"fundingstatusdate": {
+					"type": "string",
+					"format": "date",
+					"description": "Published (or Approved in future)"
+				},
+				"groupingorganisation": {
+					"$ref": "#/definitions/groupingorganisation-schema",
+					"description": "The organisation for which the funding is grouped for"
+				},
+				"fundingvalue": {
+					"$ref": "#/definitions/fundingvalue-schema"
+				},
+				"groupingreason": {
+					"type": "string",
+					"description": "Information or payment"
+				},
+				"fundings": {
+					"$ref": "#/definitions/fundings-schema"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"fundingstream",
+				"fundingperiod",
+				"fundingidentifier",
+				"fundingversion",
+				"fundingstatus",
+				"fundingstatusdate",
+				"groupingorganisation",
+				"fundingvalue",
+				"groupingreason"
+			]
+		},
+		"fundingstream-schema": {
+			"properties": {
+				"fundingstreamcode": {
+					"type": "string"
+				},
+				"fundingstreamname": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"fundingstreamcode",
+				"fundingstreamname"
+			]
+		},
+		"groupingorganisation-schema": {
+			"properties": {
+				"groupingorganisationtype": {
+					"type": "string",
+					"description": "Grouped by Region, Authority Type, LA"
+				},
+				"groupingorganisationname": {
+					"type": "string",
+					"description": "If Grouped by Type is Authority Type, then it will be value such as London, Metropolitan authorities. If Groupbytype is Region, value will be such as East of England. If Group by type is LA, then the value would be Camden"
+				},
+				"groupingorganisationidentifiers": {
+					"$ref": "#/definitions/alternativeorganisationidentifers-schema"
+				}
+			}
+		},
+		"fundingperiod-schema": {
+			"properties": {
+				"fundingperiodcode": {
+					"type": "string"
+				},
+				"fundingperiodname": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"fundingperiodcode",
+				"fundingperiodname"
+			]
+		},
+		"funding-schema": {
+			"properties": {
+				"fundingidentifier": {
+					"type": "string"
+				},
+				"fundingversion": {
+					"type": "number"
+				},
+				"organisation": {
+					"$ref": "#/definitions/organisation-schema",
+					"description": "The organisation for which the funding is for"
+				},
+				"fundingvalue": {
+					"$ref": "#/definitions/fundingvalue-schema"
+				},
+				"fundingstream": {
+					"$ref": "#/definitions/fundingstream-schema"
+				},
+				"fundingperiod": {
+					"$ref": "#/definitions/fundingperiod-schema"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"fundingidentifier",
+				"fundingversion",
+				"organisation",
+				"fundingvalue",
+				"fundingstream",
+				"fundingperiod"
+			]
+		},
+		"organisation-schema": {
+			"properties": {
+				"ukprn": {
+					"type": "string"
+				},
+				"legalname": {
+					"type": "string"
+				},
+				"tradingname": {
+					"type": "string"
+				},
+				"alternativeorganisationidentifiers": {
+					"$ref": "#/definitions/alternativeorganisationidentifers-schema"
+				},
+				"organisationgroups": {
+					"$ref": "#/definitions/organisationgroups-schema"
+				},
+				"organisationaddress":
+				{
+					"$ref": "#/definitions/organisationaddress-schema"
+                },
+                "organisationtype":{
+                    "type": "string"
+                }
+			},
+			"additionalProperties": false,
+			"required": [
+				"ukprn",
+				"legalname",
+				"organisationtype"
+			]
+		},
+		"alternativeorganisationidentifers-schema": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/alternativeorganisationidentifer-schema"
+			}
+		},
+		"alternativeorganisationidentifer-schema": {
+			"properties": {
+				"alterativeidentifiername": {
+					"type": "string"
+				},
+				"alternativeidentifiervalue": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"alterativeidentifiername",
+				"alternativeidentifiervalue"
+			]
+		},
+		"organisationaddress-schema":{
+			"properties": {
+				"addressline1": {
+					"type": "string"
+				},
+				"addressline2": {
+					"type": "string"
+				},
+				"addressline3": {
+					"type": "string"
+				},
+				"addressline4": {
+					"type": "string"
+				},
+				"town": {
+					"type": "string"
+				},
+				"county": {
+					"type": "string"
+				},
+				"postcode": {
+					"type": "string"
+				}
+			}
+		},
+		
+		"organisationgroups-schema": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/organisationgroup-schema"
+			},
+			"additionalProperties": false
+		},
+		"organisationgroup-schema": {
+			"properties": {
+				"grouptype": {
+					"type": "string"
+				},
+				"group": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"grouptype",
+				"group"
+			]
+		},
+		"fundingvalue-schema": {
+			"properties": {
+				"totalfundingvalue": {
+					"type": "number"
+				},
+				"fundingvaluebydistributionperiod": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/fundingvaluebydistributionperiod-schema"
+					}
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"fundingvaluebydistributionperiod",
+				"totalfundingvalue"
+			]
+		},
+		"fundingvaluebydistributionperiod-schema": {
+			"properties": {
+				"distributionperiod": {
+					"type": "string"
+				},
+				"fundingvaluefordistributionperiod": {
+					"type": "number"
+				},
+				"fundinglines": {
+					"$ref": "#/definitions/fundinglines-schema"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"distributionperiod",
+				"fundingvaluefordistributionperiod",
+				"fundinglines"
+			]
+		},
+		"fundinglines-schema": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/fundingline-schema"
+			}
+		},
+		"fundingline-schema": {
+			"properties": {
+				"fundinglineidentifier": {
+					"type": "integer"
+				},
+				"fundinglinetype": {
+					"type": "string",
+					"description": "This is either payable funding line or information"
+				},
+				"fundinglinename": {
+					"type": "string"
+				},
+				"fundinglinevalue": {
+					"type": "number"
+				},
+				"fundinglines": {
+					"$ref": "#/definitions/fundinglines-schema"
+				},
+				"fundinglineperiods": {
+					"$ref": "#/definitions/fundinglineperiods-schema"
+				},
+				"fundinglinecalculation": {
+					"$ref": "#/definitions/calculation-schema"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"fundinglineidentifier",
+				"fundinglinetype",
+				"fundinglinename",
+				"fundinglinevalue"
+			]
+		},
+		"fundinglineperiods-schema": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/fundinglineperiod-schema"
+			}
+		},
+		"fundinglineperiod-schema": {
+			"properties": {
+				"fundinglineperiodname": {
+					"type": "string"
+				},
+				"fundinglineperiodoccurence": {
+					"type": "integer"
+				},
+				"fundinglineperiodtype": {
+					"type": "string"
+				},
+				"fundinglineperiodyear": {
+					"type": "number"
+				},
+				"fundinglineperiodprofilevalue": {
+					"type": "number"
+				},
+				"fundinglineperioddistributionperiod": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"fundinglineperiodname",
+				"fundinglineperiodoccurence",
+				"fundinglineperiodtype",
+				"fundinglineperiodyear",
+				"fundinglineperiodprofilevalue",
+				"fundinglineperioddistributionperiod"
+			]
+		},
+		"calculation-schema": {
+			"properties": {
+				"calculationidentifier": {
+					"type": "number"
+				},
+				"calculationtype": {
+					"type": "string",
+					"description": "Pupil led funding, lumpsum, Information, Rate, Pupil Number, Weighting, Scope.. convert to Enum?"
+				},
+				"calculationname": {
+					"type": "string"
+				},
+				"calculationvalue": {
+					"type": "string"
+				},
+				"calculationformulatext": {
+					"type": "string"
+				},
+				"calculationvalueformat": {
+					"type": "string"
+				},
+				"calculationsequencenumber": {
+					"type": "number"
+				},
+				"calculationreferencedata": {
+					"$ref": "#/definitions/referencedatas-schema"
+				},
+				"calculations": {
+					"$ref": "#/definitions/calculations-schema"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"calculationtype",
+				"calculationname",
+				"calculationvalue"
+			]
+		},
+		"referencedatas-schema": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/referencedata-schema"
+			}
+		},
+		"referencedata-schema": {
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"value": {
+					"type": "string"
+				},
+				"format": {
+					"type": "string"
+				},
+				"sequence": {
+					"type": "number"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"name",
+				"value",
+				"format"
+			]
+		},
+		"calculations-schema": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/calculation-schema"
+			}
+		},
+		"fundinglinecalculationmethodology-schema": {
+			"properties": {
+				"methodologytype": {
+					"type": "string"
+				},
+				"methodologyname": {
+					"type": "string"
+				},
+				"calculations": {
+					"$ref": "#/definitions/calculations-schema"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"methodologytype",
+				"methodologyname"
+			]
+		},
+		"fundinglinecalculationmethodologies-schema": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/fundinglinecalculationmethodology-schema"
+			}
+		}
+	}
+}
